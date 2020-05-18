@@ -51,8 +51,11 @@ print('Doubling time: %f years'%doubling_time)
 # Herculano-Houzel et al. 2015, 10.1159/000437413
 nneurons = [{'species':'Caenorhabditis elegans', 'name':'Worm',
              'nneurons_low':302, 'nneurons_high':302},
+            {'species': 'Danio rerio', 'name': 'Zebrafish',  # https://elifesciences.org/articles/28158
+             'nneurons_low': 100000, 'nneurons_high': 100000},
             {'species':'Drosophila melanogaster', 'name':'Fly', # https://doi.org/10.1016/j.cub.2010.11.056
-             'nneurons_low':135000, 'nneurons_high':135000}, # https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3597383/
+             'nneurons_low':135000, 'nneurons_high':135000},
+            # https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3597383/
             {'species':'Mus musculus', 'name':'Mouse',
              'nneurons_low':67873741-10406194, 'nneurons_high':67873741+10406194},
             {'species':'Rattus norvegicus', 'name':'Rat',
@@ -100,3 +103,5 @@ ax.set_yticklabels(['$\mathregular{10^{%i}}$' %np.log10(y) for y in yticks])
 sns.despine(trim=True)
 plt.show()
 fig.savefig('scaling_figure.pdf')
+fig.savefig('scaling_figure.png', dpi=600)
+
