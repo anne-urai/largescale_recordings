@@ -71,7 +71,8 @@ nneurons = [{'species':'Caenorhabditis elegans', 'name':'Worm',
 # ====================================== #
 
 fig, ax = plt.subplots(1, 1, figsize=[5, 3.5])
-ax.scatter(df.date_num, df.neurons_log, marker='.', color='grey', zorder=-100)
+ax.scatter(df.date_num, df.neurons_log, marker='.',
+        zorder=-100)
 
 # plot Stevenson curve on top
 plt.plot(X['date_num'], res.predict(), color='k')
