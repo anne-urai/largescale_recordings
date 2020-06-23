@@ -84,10 +84,12 @@ nneurons = [{'species':'Caenorhabditis elegans', 'name':'Worm',
 
 fig, ax = plt.subplots(1, 1, figsize=[5, 3.5])
 sns.scatterplot(data=df, x='date_num', y='neurons_log', style='Source',
-                hue='Method', zorder=0, s=10, linewidths=0.5,
+                hue='Method', zorder=0, s=10, linewidths=0.5, alpha=0.5,
                 palette=sns.color_palette(["firebrick", "midnightblue"]),
                 hue_order=['Imaging', 'Ephys'],
-                markers={'S&K':'s', 'Stevenson':'o', 'Urai':'o'}, legend=False)
+                markers={'S&K':'s', 'Stevenson':'o', 'Urai':'o',
+                         'Rupprecht':'o', 'Charles':'o', 'Meijer':'o',
+                         'Svoboda':'o'}, legend=False)
 # write labels in plot, instead of legend
 ax.text(2012, np.log(8), 'Electrophysiology',
         {'color':"midnightblue", 'fontsize':9, 'fontstyle':'italic'})
