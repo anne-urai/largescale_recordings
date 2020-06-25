@@ -54,7 +54,30 @@ print(res.summary())   # Summarize model
 
 # what's the doubling time from this model? log(2) / a
 doubling_time = np.log(2) / res.params['date_num']
-print('Doubling time: %f years'%doubling_time)
+print('Doubling time S&K: %f years'%doubling_time)
+
+# extrapolate to whenever
+xvec1 = np.linspace(2000, 2500, 100)
+yvec1 = res.predict(sm.add_constant(xvec1))
+
+# ====================================== #
+# also fit on all data, including imaging
+# ====================================== #
+
+fit_data2 = df[(df['Method'] == 'Imaging')].copy()
+
+# use patsy
+y2, X2 = dmatrices('neurons_log ~ date_num', data=fit_data2, return_type='dataframe')
+mod2 = sm.OLS(y2, X2)    # Describe model
+res2 = mod2.fit()       # Fit model
+print(res2.summary())   # Summarize model
+
+# what's the doubling time from this model? log(2) / a
+doubling_time2 = np.log(2) / res2.params['date_num']
+print('Doubling time imaging: %f years'%doubling_time2)
+
+# extrapolate to whenever
+yvec2 = res2.predict(sm.add_constant(xvec1))
 
 # ====================================== #
 # SHOW SOME TARGET NUMBERS FOR NEURONS IN DIFFERENT SPECIES
@@ -77,6 +100,17 @@ nneurons = [{'species':'Caenorhabditis elegans', 'name':'Worm',
             {'species': 'Homo sapiens', 'name': 'Human',
              'nneurons_low': 86060000000-8120000000, 'nneurons_high': 86060000000+8120000000},
             ]
+
+# ====================================== #
+# for each species, when will record
+# from all their neurons?
+# ====================================== #
+
+for sp in nneurons:
+    avg_log = np.log((sp['nneurons_low'] + sp['nneurons_high']) / 2)
+    max_year = xvec1[np.abs(yvec1-avg_log).argmin()]
+    min_year = xvec1[np.abs(yvec2-avg_log).argmin()]
+    print('%s: expected %d - %d'%(sp['name'], min_year, max_year))
 
 # ====================================== #
 # make the plot
