@@ -1,3 +1,7 @@
+
+[![CC BY 4.0][cc-by-shield]][cc-by]
+
+
 Track the number of simultaneously recorded neurons over time, with an extrapolation to predict when all neurons will be recorded in different species. 
 
 Data available at https://docs.google.com/spreadsheets/d/1Wr6Wa60M4voTqb7rIG8pLDDqnp1avlYdulOSbd-EyBA/edit?usp=sharing. Based on data from Ian Stevenson, https://stevenson.lab.uconn.edu/scaling/#
@@ -5,8 +9,6 @@ Data available at https://docs.google.com/spreadsheets/d/1Wr6Wa60M4voTqb7rIG8pLD
 Anne Urai, CSHL, 2020
 
 
-
-Shield: [![CC BY 4.0][cc-by-shield]][cc-by]
 
 This work is licensed under a
 [Creative Commons Attribution 4.0 International License][cc-by].
