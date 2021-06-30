@@ -84,18 +84,18 @@ yvec2 = res2.predict(sm.add_constant(xvec1))
 # ====================================== #
 
 # Herculano-Houzel et al. 2015, 10.1159/000437413
-nneurons = [{'species':'Caenorhabditis elegans', 'name':'Worm',
+nneurons = [{'species':'Caenorhabditis elegans', 'name':'C. elegans',
              'nneurons_low':302, 'nneurons_high':302},
-            {'species': 'Danio rerio (larvae)', 'name': 'Larval zebrafish',  # https://elifesciences.org/articles/28158
+            {'species': 'Danio rerio (larvae)', 'name': 'Zebrafish (larva)',  # https://elifesciences.org/articles/28158
              'nneurons_low': 100000, 'nneurons_high': 100000},
-            # {'species':'Drosophila melanogaster', 'name':'Fly', # https://doi.org/10.1016/j.cub.2010.11.056
+            # {'species':'Drosophila melanogaster', 'name':'Drosophila', # https://doi.org/10.1016/j.cub.2010.11.056
             #  'nneurons_low':135000, 'nneurons_high':135000},
             # https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3597383/
             {'species':'Mus musculus', 'name':'Mouse', # Vincent et al 2010: 7.5x10^7
              'nneurons_low':67873741-10406194, 'nneurons_high':67873741+10406194},
             # {'species':'Rattus norvegicus', 'name':'Rat',
             #  'nneurons_low':188867832-12622383, 'nneurons_high':188867832+12622383},
-            {'species': 'Macaca mulatta', 'name': 'Monkey',
+            {'species': 'Macaca mulatta', 'name': 'Macaque',
              'nneurons_low': 6376160000, 'nneurons_high': 6376160000},
             {'species': 'Homo sapiens', 'name': 'Human',
              'nneurons_low': 86060000000-8120000000, 'nneurons_high': 86060000000+8120000000},
@@ -125,7 +125,7 @@ sns.scatterplot(data=df, x='date_num', y='neurons_log', style='Source',
                          'Rupprecht':'o', 'Charles':'o', 'Meijer':'o',
                          'Svoboda':'o'}, legend=False)
 # write labels in plot, instead of legend
-ax.text(2012, np.log(8), 'Electrophysiology',
+ax.text(2004, np.log(2), 'Electrophysiology',
         {'color':"midnightblue", 'fontsize':9, 'fontstyle':'italic'})
 ax.text(1985, np.log(1000), 'Optical\nimaging',
         {'color':"firebrick", 'fontsize':9, 'fontstyle':'italic'})
@@ -146,17 +146,21 @@ ax.plot(xvec, yvec, color='k', linestyle=':')
 # show, for each species, the range
 for a in nneurons:
     # when can we expect this species to have all its neurons recorded?
-    year = 2030
+    year = 1958
     n_neurons = np.log((a['nneurons_low'] + a['nneurons_high'])/2)
-    ax.axhline(y=n_neurons, color='grey', linestyle=':', zorder=-100)
-    ax.text(year, n_neurons, a['species'],
-            verticalalignment='bottom', fontsize=8, fontstyle='italic')
+    ax.axhline(y=n_neurons, color='grey', linestyle=':', zorder=-100, xmax=0.92)
+    ax.text(year, n_neurons, a['name'],
+            verticalalignment='bottom', fontsize=7,
+            color='grey')
 
 # layout
 yticks = np.logspace(0, 11, 12)
 ax.set(ylabel='Simultaneously recorded neurons', xlabel='',
        yticks=np.log(yticks))
+yticklabs = ['1', '10', '100', '1k', '10k', '100k', '1m', '10m', '100m', '1b', '10b', '100b']
 ax.set_yticklabels(['$\mathregular{10^{%i}}$' %np.log10(y) for y in yticks])
+ax.set_yticklabels(yticklabs)
+
 sns.despine(trim=True)
 plt.show()
 fig.savefig('scaling_figure.pdf')
