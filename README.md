@@ -17,7 +17,7 @@ This work is licensed under a
 
 If you use the code or figure, **please cite**
     
-Urai AE, Doiron B, Leifer AM & Churchland AK (2021) _Large-scale neural recordings call for new insights to link brain and behavior._ arXiv: 2103.14662. https://arxiv.org/abs/2103.14662
+Urai AE, Doiron B, Leifer AM & Churchland AK (2022) _Large-scale neural recordings call for new insights to link brain and behavior._ Nature Neuroscience: 25, 11–19. https://doi.org/10.1038/s41593-021-00980-9
 
 [![CC BY 4.0][cc-by-image]][cc-by]
 
